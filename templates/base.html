@@ -1,0 +1,87 @@
+<!DOCTYPE html>
+{% load static %}
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Blogs</title>
+
+    <link rel="stylesheet" href="{% static '/css/styles.css' %}">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+
+</head>
+
+<body class="dark-mode">
+    <header>
+        <h1 class="proj-title">Quick Setups.</h1>
+        <ul class="nav-link">
+            <li><a href="{% url 'home'%}">New Blog</a></li>
+            <li><a href="">Profile</a></li>
+            <li><a href="">About</a></li>
+        </ul>
+
+    </header>
+
+    <div class="flex-container">
+        <div class="all-blogs">
+            <div class="all-blog-container">
+                <h3>All Blogs</h3>
+                <form action="">
+                    <input type="search" name="blog-name" id="blog-name">
+                    <button type="search">search</button>
+                </form>
+                <ul class="blog-list">
+                    {% for path in paths %}
+                    <li class="blog-item"><a href="{% url 'blog' path.path %}">{{ path.path_file_name }}
+                        </a></li>
+                    {% endfor %}
+
+                </ul>
+
+            </div>
+        </div>
+        <div class="blog-content">
+
+            {% block content%}
+
+
+
+
+
+            {% endblock %}
+
+        </div>
+        <div class="insert-input">
+            <div class="button-container">
+                <button type="button" onclick="addTitle()">Add Title</button>
+                <button type="button" onclick="addParagraph()">Add Paragraph</button>
+                <button type="button" onclick="addImage()">Add Image</button>
+                <button type="button" onclick="addCode()">Add Code</button>
+                <button type="button" onclick="saveInput()" id="save-button">Save</button>
+
+
+                <form action="{% url 'home' %}" method="POST" id="save-html-form">
+                    {% csrf_token %}
+                    <input type="hidden" name="inputContent" id="inputContent">
+                    <button type="submit" onclick="postAll()">Post</button>
+                </form>
+
+            </div>
+        </div>
+    </div>
+    <div class="modal">
+        Blog with this Name already Exists
+    </div>
+
+    <footer>
+        <i class="fa fa-github" style="font-size:20px"></i>
+        <p>Made by Prajwal Surve</p>
+    </footer>
+
+    {% load static %}
+    <script src="{% static 'js/main.js' %}"></script>
+
+</body>
+
+</html>

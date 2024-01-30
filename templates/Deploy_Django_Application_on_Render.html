@@ -1,0 +1,33 @@
+{% extends "base.html" %}
+{% block content %}
+
+<div class="blog-title">Deploy Django Application on Render</div>
+<hr>
+<p class="blog-paragraph"><a href="https://Survepraju.github.io/Blog/skel.html">Before Starting first Setup
+        your database</a> </p>
+<p class="blog-paragraph">Create A Web Service</p>
+<p class="blog-paragraph">Head over to your Render dashboard. Click New + and Select Web Service</p>
+<p class="blog-paragraph">Install gunicorn and change your requirements.txt in your Django project. By
+    performing pip freeze > requirements.txt, you can update installed packages in your requirements.txt.
+    This automatically changes your project's list of required files.</p>
+<p class="blog-paragraph">Then, push your changes to Git. Remember, you connected Git to your web service,
+    so Render monitors the repo and auto deploys when it detects any changes.</p>
+<p class="blog-paragraph">Install gunicorn </p>
+<p class="blog-code">pip install gunicorn</p>
+
+<p class="blog-paragraph">update your requirements.txt</p>
+<p class="blog-code">pip freeze > requirements.txt</p>
+
+
+<p class="blog-paragraph">Make sure that you add Render Web Services to your ALLOWED_HOSTS in settings.py
+</p>
+<p class="blog-paragraph">Also make sure that your requirements.txt is file is up to date, As it will be
+    neccessary to install libraries, resources to your app</p>
+<p class="blog-paragraph">In start command enter $gunicorn your_directory_name.wsgi.application </p>
+{% load static %}
+<img src="{% static 'images/req-1.png' %}" alt="" class="image">
+
+
+
+
+{% endblock content %}
