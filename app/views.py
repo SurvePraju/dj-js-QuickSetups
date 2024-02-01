@@ -20,11 +20,9 @@ class Home(View):
         if file_name:
             file_name = file_name[0]
             file_name_url = file_name.replace(" ", "_")
-            with open(f"templates/{file_name_url}.html", "a+") as f:
-                f.seek(0)
-                f.write("{% extends 'base.html' %}\n{% block content %}" +
-                        html+"{% endblock content%}")
-            FilePaths(path=file_name_url, path_file_name=file_name).save()
+
+            FilePaths(path=file_name_url, path_file_name=file_name,
+                      html_content=html).save()
             # Its Inverse path = "_____"  and Path_File _name = ' "     " '
             return redirect("home")
         else:
@@ -34,4 +32,5 @@ class Home(View):
 class ViewBlog(View):
     def get(self, request, blog):
         paths = FilePaths.objects.all()
-        return render(request, f"{blog}.html", {"paths": paths})
+        blog = FilePaths.objects.get(path=blog)
+        return render(request, f"display_temp.html", {"paths": paths, "blog": blog})
